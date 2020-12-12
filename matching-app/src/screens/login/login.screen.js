@@ -17,6 +17,9 @@ import {
     auth,
 } from "../../libraries/firebase/firebase";
 
+import Person from '@material-ui/icons/Person';
+import DoubleArrow from "@material-ui/icons/DoubleArrow";
+
 // import Paper from '@material-ui/core/Paper';
 // import Container from '@material-ui/core/Container';
 // import { Button } from "@material-ui/core";
@@ -130,7 +133,7 @@ class Login extends React.Component {
 
                 // console.log("user logged!");
 
-                this.props.history.push('/home');
+                this.props.history.push('/');
 
             })
 
@@ -138,7 +141,8 @@ class Login extends React.Component {
 
                 // console.log(error.code);
 
-                alert('Ups, the data is not correct! Try it again!');
+                // alert('Ups, the data is not correct! Try it again!');
+                alert("Ups, la información es incorrecta! Intentalo de nuevo!");
 
             });
     }
@@ -195,6 +199,9 @@ class Login extends React.Component {
                                     padding: 5,
                                     display: "flex",
                                     flexDirection: "column",
+                                    alignContent: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
                                 }}
 
                                 elevation={5}
@@ -202,14 +209,29 @@ class Login extends React.Component {
 
                                 <Typography variant="h6" component="h6">
 
-                                    Welcome to Close
+                                    Bienvenido a LikeMe
 
                                 </Typography>
 
                                 <Typography variant="body2" component="p">
 
-                                    In here you can match with people you know! It is not a marketplace of people, it is just a way to match with people you know previously!
+                                    {/* In here you can match with people you know! It is not a marketplace of people, it is just a way to match with people you know previously! */}
+                                    <p>
+                                        Aquí puedes darle like a la persona que te gusta, y si ella también te da like, entonces harán match! Si la otra persona no te da like, ella NUNCA sabrá que le diste like! Asi que no te preocupes si no hacen match! Ella nunca sabrá!
+                                    </p> 
+                                    
+                                    <p>
+                                        Esto NO es como Tinder, ya que no hay un marketplace de personas! Acá solo le puedes dar like al link de esta persona, no encontrarás mas personas! Esto es mas personal!
+                                    </p>
 
+                                    <p>
+                                        Puedes pegar el link de tu perfil publico de esta página en tu Instagram, Whatsapp, Facebook, Tiktok o donde quieras!
+                                    </p>
+
+                                </Typography>
+
+                                <Typography variant="h5" component="h5">
+                                    Ingresar
                                 </Typography>
 
                                 <TextField
@@ -222,7 +244,7 @@ class Login extends React.Component {
 
                                 <TextField
                                     id="standard-uncontrolled"
-                                    label="password"
+                                    label="Contraseña"
                                     type="password"
                                     // defaultValue="Correo electrónico"
                                     margin="normal"
@@ -232,36 +254,25 @@ class Login extends React.Component {
 
                                 {/* login */}
                                 <Button align="center" variant="contained" color="primary" onClick={this.on_submit}>
-                                    Login
+                                    <DoubleArrow
+                                        style = {{
+                                            margin: 5,
+                                        }}
+                                    />
+                                    Ingresar
                                 </Button>
 
                                 {/* register */}
                                 <Button align="center" variant="contained" color="secondary" onClick={this.on_register}>
-                                    Register (Enter your email and a password)
+                                    <Person
+                                        style = {{
+                                            margin: 5,
+                                        }}
+                                    />
+                                    Registrarme
                                 </Button>
 
                             </Paper>
-
-                            {/* box to message of register
-                            <Paper
-                                style = {{
-                                    display: "flex",
-                                    flexDirection: "column"
-                                }}
-                            >
-                                We are currently testing this tool to keep track of your help to get a better world! If you want to register, please type your email in the next form and we will send you more information!
-
-                                <Button
-                                    align="center" variant="contained" color="primary"
-                                    onClick = {() => {
-
-                                        // redirect
-                                        window.location.replace("https://forms.gle/1aVeXmFEzNE7b2Sv8");
-                                    }}
-                                >
-                                    Request access to #OneGarbagePerDay
-                                </Button>
-                            </Paper> */}
 
                         </Container>
 

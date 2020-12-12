@@ -82,7 +82,7 @@ class App extends Component {
 
                 <Typography gutterBottom variant="h4" component="h2">
 
-                  Home
+                  LikeMe
 
                 </Typography>
 
@@ -92,9 +92,9 @@ class App extends Component {
 
           </AppBar>
 
-          <Route path="/" exact component={Login} />
+          <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
-          <Route path="/home" exact component={UserDashboard} />
+          <Route path="/" exact component={UserDashboard} />
           <Route path="/publicProfile/:userId" component={PublicProfile} />
           {/* <Route path="/prizes" exact component={Prizes} /> */}
 

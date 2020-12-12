@@ -8,8 +8,8 @@ import Container from '@material-ui/core/Container';
 import { Button, Box } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
-// import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-// import LiveTv from '@material-ui/icons/LiveTv';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import Person from '@material-ui/icons/Person';
 
 import {
     fs,
@@ -36,7 +36,7 @@ class PublicProfile extends React.Component {
         // initial states
         this.state = {
             loading: true,
-            userName: "default",
+            userName: "",
             // workshopsByCategory: null,
             // garbagesPerDay: [],
             // email: "",
@@ -54,8 +54,8 @@ class PublicProfile extends React.Component {
         fs.collection('users').doc(this.props.match.params.userId)
         .get().then(doc => {
             
-            console.log("getting user name");
-            console.log(doc.data());
+            // console.log("getting user name");
+            // console.log(doc.data());
 
             this.setState({
                 loading: false,
@@ -78,7 +78,8 @@ class PublicProfile extends React.Component {
                 
                 console.log("user not logged");
                 
-                alert("You need an account (and login in) in our platform in order to 'give likes'");
+                // alert("You need an account (and login in) in our platform in order to 'give likes'");
+                alert("Necesitas una cuenta en nuestra plataforma para poder dar y recibir likes de otras personas!");
                 
                 // this.props.history.push('/');
                 
@@ -123,7 +124,8 @@ class PublicProfile extends React.Component {
                                 // check if match already exists
                                 if (likeUser.matches.includes(loggedUser.id) & loggedUser.matches.includes(likeUser.id)) {
                                     
-                                    alert("You already did match! Check your profile in order to start to speak!");
+                                    // alert("You already did match! Check your profile in order to start to speak!");
+                                    alert("Ya hicieron match! Anda a tu perfil y comienza a hablar con esta persona!");
                                     
                                 }
                                 
@@ -139,7 +141,8 @@ class PublicProfile extends React.Component {
                                         loggedUser.matches.push(likeUser.id);
                                         
                                         // user message
-                                        alert("Congratulations! You did match! Go to your profile and start talking!");
+                                        // alert("Congratulations! You did match! Go to your profile and start talking!");
+                                        alert("Felicitaciones! Acabas de hacer match con esta persona! Anda a tu perfil para poder comenzar a hablar!");
                                         
                                         // create notification in DB
                                         fs.collection("matches").add({
@@ -162,7 +165,8 @@ class PublicProfile extends React.Component {
                                     else {
                                         
                                         // usre message
-                                        alert("Your like was saved, now you have to wait if the other person gives you like too! Good luck!");
+                                        // alert("Your like was saved, now you have to wait if the other person gives you like too! Good luck!");
+                                        alert("Tu like fue guardado, ahora debes esperar a que la otra persona te de like también! Buena suerte!");
                                         // console.log("other person don't like you");
                                         
                                     };
@@ -171,8 +175,8 @@ class PublicProfile extends React.Component {
                                 };
                                 
                                 // update users on BD
-                                console.log("logged user updated: ", loggedUser);
-                                console.log("like user updated: ", likeUser);
+                                // console.log("logged user updated: ", loggedUser);
+                                // console.log("like user updated: ", likeUser);
 
                                 // update logged user
                                 loggedUserRef.update(loggedUser)
@@ -198,7 +202,8 @@ class PublicProfile extends React.Component {
                         
                         // if like already exists
                         else{
-                            alert("You already liked this person. Must to wait until other person give you like!");
+                            // alert("You already liked this person. Must to wait until other person give you like!");
+                            alert("Ya le diste like a esta persona! Ahora debes esperar a que te de like! Buena suerte!");
                         };
                         
                     });
@@ -207,7 +212,8 @@ class PublicProfile extends React.Component {
 
                 // it's the same user
                 else {
-                    alert("You can not do like to yourself");
+                    // alert("You can not do like to yourself");
+                    alert("Ups! No puedes darte like a ti mismo!");
                 };
 
             };
@@ -242,19 +248,28 @@ class PublicProfile extends React.Component {
                                 style={{
                                     margin: 15,
                                     padding: 5,
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "center"
                                 }}
 
                                 elevation={5}
                             >
                                 <Typography variant="h6" component="h6" style={{ textAlign: "center", }}>
 
-                                    Hi! This is {this.state.userName}
+                                    Hola soy {this.state.userName}!
 
                                 </Typography>
 
                                 <Typography variant="p" component="body2" style={{ textAlign: "center", }}>
 
-                                    You can give me "like me" if I like to you :) If I gave you like too, so we will do match :) and we will be notified, otherwise I will never know you gave me like :), so don't worry about it!
+                                    {/* You can give me "like me" if I like to you :) If I gave you like too, so we will do match :) and we will be notified, otherwise I will never know you gave me like :), so don't worry about it! */}
+                                    <p>
+                                        Puedes darme "me gusta" si es que te gusto :) y si yo también te doy "me gustas", entonces haremos match y podremos hablar! 
+                                    </p>
+                                    <p>
+                                        Si es que no te doy "me gustas", yo nunca sabré que me diste "me gustas"! Asi que no te preocupes, nadie sabrá! Solo tú!
+                                    </p> 
 
                                 </Typography>
 
@@ -267,25 +282,39 @@ class PublicProfile extends React.Component {
                                         this.likeToUser();
                                     }}
                                 >
-                                    Like me
+                                    <FavoriteBorder
+                                        // margin = {50}
+                                        style = {{
+                                            margin: 4,
+                                        }}
+                                    />
+                                    Me gustas
                                 </Button>
 
                                 <Typography variant="p" component="body2" style={{ textAlign: "center", }}>
 
-                                    If you are not logged, click here:
+                                    {/* If you are not logged, click here: */}
+                                    Si no estas registrado, click aquí
 
                                 </Typography>
                                 
                                 <Button
                                     variant="contained"
-                                    color="primary"
+                                    color="secondary"
                                     onClick={() => {
                                         // alert("Go to register");
                                         // this.s
-                                        this.props.history.push('/');
+                                        this.props.history.push('/login');
                                     }}
                                 >
-                                    Sign in
+                                    <Person
+                                        // margin = {50}
+                                        style={{
+                                            margin: 4,
+                                        }}
+                                    />
+                                    {/* Sign in */}
+                                    Registrarse
                                 </Button>
 
                             </Paper>

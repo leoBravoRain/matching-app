@@ -16,6 +16,8 @@ import {
     auth,
 } from "../../libraries/firebase/firebase";
 
+import Person from '@material-ui/icons/Person';
+import Close from "@material-ui/icons/Close";
 
 // //  component
 // import WorkshopComponent from "./components/workshop.component";
@@ -81,7 +83,7 @@ class UserDashboard extends React.Component {
 
                 // console.log("user not logged");
 
-                this.props.history.push('/');
+                this.props.history.push('/login');
 
                 // console.log("aosjid");
 
@@ -202,59 +204,80 @@ class UserDashboard extends React.Component {
                                 <Button variant="contained" color="primary"
                                     onClick={() => this.props.history.push("/publicProfile/" + this.state.userId)}
                                 >
-                                    See my public profile
+                                    <Person
+                                        style = {{
+                                            margin: 5,
+                                        }}
+                                    />
+                                    {/* See my public profile */}
+                                    Ver mi perfil público
                                 </Button>
 
                                 <Button variant="contained" color="primary"
                                     onClick={() => this.logout()}
                                 >
-                                    Logout
+                                    <Close
+                                        style = {{
+                                            margin: 5,
+                                        }}
+                                    />
+                                    {/* Logout */}
+                                    Cerrar sesión
                                 </Button>
                                 
                                 <Typography variant="h6" component="h6" style={{ textAlign: "center", }}>
 
-                                    Your matches
+                                    {/* Your matches */}
+                                    Tus matches
  
                                 </Typography>
 
                                 {/* collection of likes */}
 
                                 {
-                                    this.state.matchesWithUsers.map((item) => {
+                                    this.state.matchesWithUsers.length > 0 ?
+                                        this.state.matchesWithUsers.map((item) => {
 
-                                        return (
-                                            <Box>
+                                            return (
+                                                <Box>
 
-                                                <Typography variant="body2">
-                                                    
-                                                    {item.name} 
+                                                    <Typography variant="body2">
+                                                        
+                                                        {item.name} 
 
-                                                </Typography>
+                                                    </Typography>
 
-                                                <Typography variant="body2"
-                                                    onClick = {
-                                                        () => {
-                                                            // alert("aisod");
-                                                            // console.log(this);
-                                                            // this.window.props.location.href(item.linkToUser)
-                                                            window.open(item.linkToProfile);
+                                                    <Typography variant="body2"
+                                                        onClick = {
+                                                            () => {
+                                                                // alert("aisod");
+                                                                // console.log(this);
+                                                                // this.window.props.location.href(item.linkToUser)
+                                                                window.open(item.linkToProfile);
+                                                            }
                                                         }
-                                                    }
-                                                >
+                                                    >
 
-                                                    Let's talk!
+                                                        {/* Let's talk! */}
+                                                        Hablemos!
 
-                                                </Typography>
+                                                    </Typography>
 
-                                                {/* <img
-                                                    width={200}
-                                                    height={200}
-                                                    src={item.image}
-                                                /> */}
+                                                    {/* <img
+                                                        width={200}
+                                                        height={200}
+                                                        src={item.image}
+                                                    /> */}
 
-                                            </Box>
-                                        )
-                                    })
+                                                </Box>
+                                            )
+                                        })
+
+                                        :
+
+                                        <Typography>
+                                            Aun no tienes matches 
+                                        </Typography>
                                 }
 
                             </Paper>

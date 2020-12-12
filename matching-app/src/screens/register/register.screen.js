@@ -122,9 +122,10 @@ class Register extends React.Component {
 
                     // console.log("Added document with ID: ", ref.id)
 
-                    alert("Registered successfully!");
+                    // alert("Registered successfully!");
+                    alert("Registro exitoso");
 
-                    this.props.history.push('/home');
+                    this.props.history.push('/');
 
                 });
                 
@@ -194,19 +195,19 @@ class Register extends React.Component {
 
                                 <Typography variant="h6" component="h6">
 
-                                    Register to Close
+                                    Registrate
 
                                 </Typography>
 
                                 <Typography variant="body2" component="p">
 
-                                    In here you can match with people you know! It is not a marketplace of people, it is just a way to match with people you know previously!
+                                    Ingresa tu información
 
                                 </Typography>
 
                                 <TextField
                                     id="standard-uncontrolled"
-                                    label = "Name"
+                                    label = "Nombre"
                                     margin="normal"
                                     onChange={(e) => this.setState({ name: e.target.value })}
                                     value={this.state.name}
@@ -214,9 +215,9 @@ class Register extends React.Component {
 
                                 <TextField
                                     id="standard-uncontrolled"
-                                    label="Link to profile"
+                                    label="Link a un perfil que uses normalmente"
                                     margin="normal"
-                                    helperText = "It can be your Instagram or Whatsapp link, because people will connect with you using this link! It is really important to add a link where you usually speak"
+                                    helperText = "Puede ser el link a tu Instagram o Whatsapp, ya que si haces match, la persona te hablará a este perfil"
                                     onChange={(e) => this.setState({ linkToProfile: e.target.value })}
                                     value={this.state.linkToProfile}
                                 />
@@ -231,7 +232,7 @@ class Register extends React.Component {
 
                                 <TextField
                                     id="standard-uncontrolled"
-                                    label="Password in this platform"
+                                    label="Contraseña para esta plataforma"
                                     type="password"
                                     // defaultValue="Correo electrónico"
                                     margin="normal"
@@ -242,7 +243,7 @@ class Register extends React.Component {
 
                                 {/* register */}
                                 <Button align="center" variant="contained" color="secondary" onClick={this.on_register}>
-                                    Register
+                                    Registrar
                                 </Button>
 
                             </Paper>
