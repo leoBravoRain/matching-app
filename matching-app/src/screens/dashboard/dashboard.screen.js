@@ -50,7 +50,8 @@ class UserDashboard extends React.Component {
         // initial states
         this.state = {
             loading: true,
-            matchesWithUsers: []
+            matchesWithUsers: [],
+            likesFromUsers: 0,
             // workshopsByCategory: null,
             // garbagesPerDay: [],
             // email: "",
@@ -103,6 +104,8 @@ class UserDashboard extends React.Component {
 
                         if (doc_.exists) {
 
+                            const likesFromUsers = doc_.data().likesFromUsers.length;
+
                             var matchesWithUsers = [];
     
                             if (doc_.data().matches.length > 0){
@@ -127,6 +130,7 @@ class UserDashboard extends React.Component {
                                     this.setState({
             
                                         matchesWithUsers: matchesWithUsers,
+                                        likesFromUsers: likesFromUsers,
                                         loading: false,
                                         userId: user.uid,
             
@@ -135,12 +139,13 @@ class UserDashboard extends React.Component {
                                 });
     
                             }
-    
+                            
+                            // if user does not have matches
                             else {
     
                                 // // update state
                                 this.setState({
-        
+                                    likesFromUsers: likesFromUsers,
                                     loading: false,
                                     userId: user.uid,
         
@@ -225,6 +230,10 @@ class UserDashboard extends React.Component {
                                     Cerrar sesión
                                 </Button>
                                 
+                                <Typography>
+                                    Personas que te han dado "Me gustas": {this.state.likesFromUsers}
+                                </Typography>
+
                                 <Typography variant="h6" component="h6" style={{ textAlign: "center", }}>
 
                                     {/* Your matches */}
