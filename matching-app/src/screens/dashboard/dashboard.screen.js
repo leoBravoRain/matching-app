@@ -276,7 +276,13 @@ class UserDashboard extends React.Component {
                                         :
 
                                         <Typography>
-                                            Aun no tienes matches 
+                                            <p>
+                                                Aun no tienes matches
+                                            </p>
+
+                                            <p>
+                                                Comparte y difunde tu link de tu perfil público en tus redes sociales, así las personas lo podrán ver!
+                                            </p>
                                         </Typography>
                                 }
 

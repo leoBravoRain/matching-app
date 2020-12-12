@@ -12,12 +12,14 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 // import { makeStyles } from '@material-ui/core/styles';
-import Info from '@material-ui/icons/Info';
-import Add from "@material-ui/icons/Add";
-import MailOutline from "@material-ui/icons/MailOutline";
+// import Info from '@material-ui/icons/Info';
+// import Add from "@material-ui/icons/Add";
+// import MailOutline from "@material-ui/icons/MailOutline";
+
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -82,6 +84,11 @@ class App extends Component {
 
                 <Typography gutterBottom variant="h4" component="h2">
 
+                  <FavoriteBorder
+                    style = {{
+                      margin: 4,
+                    }}
+                  />
                   LikeMe
 
                 </Typography>

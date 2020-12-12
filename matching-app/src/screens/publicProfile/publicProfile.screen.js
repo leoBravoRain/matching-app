@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Person from '@material-ui/icons/Person';
+import FileCopy from '@material-ui/icons/FileCopy';
 
 import {
     fs,
@@ -37,6 +38,7 @@ class PublicProfile extends React.Component {
         this.state = {
             loading: true,
             userName: "",
+            userIsLoggedUser: false,
             // workshopsByCategory: null,
             // garbagesPerDay: [],
             // email: "",
@@ -48,7 +50,6 @@ class PublicProfile extends React.Component {
     }
 
     componentDidMount() {
-
         
         // get user name
         fs.collection('users').doc(this.props.match.params.userId)
@@ -65,6 +66,23 @@ class PublicProfile extends React.Component {
         })
         .catch(er => {
             console.log(er);
+        });
+
+        // check if user is logged
+        auth.onAuthStateChanged((user) => {
+
+           if (user){
+
+                // if like user is different from logged user
+                if (user.uid == this.props.match.params.userId) {
+
+                    this.setState({
+                        userIsLoggedUser: true,
+                    })
+                }
+
+            }
+
         });
 
     }
@@ -255,6 +273,7 @@ class PublicProfile extends React.Component {
 
                                 elevation={5}
                             >
+
                                 <Typography variant="h6" component="h6" style={{ textAlign: "center", }}>
 
                                     Hola soy {this.state.userName}!
@@ -316,6 +335,54 @@ class PublicProfile extends React.Component {
                                     {/* Sign in */}
                                     Registrarse
                                 </Button>
+
+                                
+                                {
+                                    this.state.userIsLoggedUser &&
+
+                                    <Container
+                                        style={{
+                                            justifyContent: "center",
+                                            flexDirection: "column",
+                                            display: "flex",
+                                            textAlign: "center",
+                                        }}
+                                    >
+
+                                        <p>
+                                            Este botón solo lo puedes ver tú
+                                        </p>
+
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={() => {
+
+                                                // copy link to clipboard
+                                                const el = document.createElement('textarea');
+                                                el.value = window.location.href;
+                                                document.body.appendChild(el);
+                                                el.select();
+                                                document.execCommand('copy');
+                                                document.body.removeChild(el);
+
+                                                // user message
+                                                alert("Link copiado!");
+
+                                            }}
+                                        >
+                                            <FileCopy
+                                                // margin = {50}
+                                                style={{
+                                                    margin: 4,
+                                                }}
+                                            />
+
+                                            Copiar este link en mis redes sociales
+
+                                        </Button>
+                                    </Container>
+                                }
 
                             </Paper>
 
